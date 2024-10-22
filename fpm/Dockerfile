@@ -22,9 +22,6 @@ RUN pecl install xdebug \
   pecl install xdebug && docker-php-ext-enable xdebug
 
 
-# Добавление конфигурации для Xdebug
-#RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20220829/xdebug.so" > /usr/local/etc/php/conf.d/xdebug.ini
-
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Разрешаем запуск Composer от суперпользователя

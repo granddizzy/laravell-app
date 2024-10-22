@@ -6,7 +6,7 @@ services:
     image: myapp/nginx
     container_name: laravel-app_webserver
     ports:
-      - "8000:8000"
+      - "80:8000"
     volumes:
       - ./code:/code/
       - ./phpsocket:/run
@@ -32,7 +32,7 @@ services:
     networks:
       - laravel-app_app-network
     depends_on:
-#      - laravel-app_database
+      - laravel-app_database
       - laravel-app_memcache
 
   #  php-cli:
@@ -56,22 +56,22 @@ services:
     networks:
       - laravel-app_app-network
 
-#  laravel-app_database:
-#    build:
-#      context: ./database
-#      dockerfile: Dockerfile
-#    container_name: laravel-app_database
-#    environment:
-#      MYSQL_DATABASE: ${DB_NAME}
-#      MYSQL_USER: ${DB_USER}
-#      MYSQL_PASSWORD: ${DB_PASSWORD}
-#      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-#    ports:
-#      - "3309:3306"
-#    volumes:
-#      - ./db:/var/lib/mysql
-#    networks:
-#      - laravel-api_app-network
+  laravel-app_database:
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    container_name: laravel-app_database
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    ports:
+      - "3309:3306"
+    volumes:
+      - ./db:/var/lib/mysql
+    networks:
+      - laravel-app_app-network
 
 #Docker Networks
 networks:
