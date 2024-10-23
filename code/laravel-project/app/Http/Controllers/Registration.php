@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class Registration extends Controller {
     public function index() {
@@ -16,25 +18,15 @@ class Registration extends Controller {
             'email' => 'required|email|max:255',
         ]);
 
-        $name = $request->input('name');
-        $surname = $request->input('surname');
-        $email = $request->input('email');
+        // Создание нового пользователя
+        $user = User::create([
+            'first_name' => $request->input('name'),
+            'last_name' => $request->input('surname'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+        ]);
 
-//        return response()->json([
-//            'success' => true,
-//            'data' => [
-//                'name' => $name,
-//                'surname' => $surname,
-//                'email' => $email,
-//            ],
-//        ]);
-
-        $user = [
-            'name' => $request->input('name'),
-            'surname' => $request->input('surname'),
-            'email' => $request->input('email')
-        ];
-
-        return view('main', compact('user'));
+        // Редирект на главную страницу
+        return redirect()->route('home');
     }
 }
