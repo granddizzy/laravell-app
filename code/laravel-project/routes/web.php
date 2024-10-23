@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,8 +19,16 @@ Route::get('/', function () {
     return view('main');
 })->name('home');
 
-Route::get('/users', [\App\Http\Controllers\Registration::class, 'index'])->name('users');
+Route::get('/users', [UserController::class, 'showList'])->name('users');
 
-Route::get('/register', [\App\Http\Controllers\Registration::class, 'index'])->name('register');
+Route::get('/register', [PageController::class, 'registration'])->name('register');
 
-Route::post('/user', [\App\Http\Controllers\Registration::class, 'store'])->name('user.store');
+Route::post('/user', [UserController::class, 'store'])->name('user.store');
+
+Route::get('/contacts', [PageController::class, 'contacts'])->name('contacts');
+
+Route::get('/login', [PageController::class, 'login'])->name('login');
+
+Route::post('/login', [UserController::class, 'login'])->name('user.login');
+
+Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
