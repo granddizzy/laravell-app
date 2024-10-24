@@ -30,7 +30,6 @@ class UserController extends Controller {
         // Аутентификация пользователя
         Auth::login($user);
 
-        // Редирект на главную страницу
         return redirect()->route('home');
     }
 
@@ -61,4 +60,42 @@ class UserController extends Controller {
         Auth::logout();
         return redirect()->route('home');
     }
+
+    public function profile(?int $id = null) {
+        if (is_null($id)) {
+            $user = Auth::user();
+        } else {
+            $user = User::findOrFail($id);
+        }
+        return view('profile', compact('user'));
+    }
+
+    public function editProfile(?int $id = null) {
+        if (is_null($id)) {
+            $user = Auth::user();
+        } else {
+            $user = User::findOrFail($id);
+        }
+        return view('editProfile', compact('user'));
+    }
+
+    public function update(Request $request, $id) {
+        $user = User::findOrFail($id);
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'surname' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $user->id, // уникальность, исключая текущего пользователя
+        ]);
+
+        $user->update([
+            'first_name' => $request->input('name'),
+            'last_name' => $request->input('surname'),
+            'email' => $request->input('email'),
+            'password' => $request->input('password') ? Hash::make($request->input('password')) : $user->password,
+        ]);
+
+        return redirect()->route('home');
+    }
+
 }

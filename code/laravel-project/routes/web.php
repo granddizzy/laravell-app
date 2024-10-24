@@ -28,7 +28,11 @@ Route::post('/user', [UserController::class, 'store'])->name('user.store');
 Route::get('/contacts', [PageController::class, 'contacts'])->name('contacts');
 
 Route::get('/login', [PageController::class, 'login'])->name('login');
-
 Route::post('/login', [UserController::class, 'login'])->name('user.login');
 
 Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
+
+Route::get('/user/{id}', [UserController::class, 'profile'])->name('user.profile');
+Route::get('/user/edit/{id}', [UserController::class, 'editProfile'])->name('edit.profile');
+Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
+
