@@ -3,6 +3,7 @@
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PdfGeneratorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,4 +36,9 @@ Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
 Route::get('/user/{id}', [UserController::class, 'profile'])->name('user.profile');
 Route::get('/user/edit/{id}', [UserController::class, 'editProfile'])->name('edit.profile');
 Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
-Route::get('/user/{id}/download-pdf', [UserController::class, 'downloadProfileAsPdf'])->name('user.downloadPdf');
+Route::get('/user/{id}/download-pdf', [PdfGeneratorController::class, 'index'])->name('user.downloadPdf');
+
+Route::get('/api/users', [UserController::class, 'apiUsers'])->name('api.users');
+Route::get('/api/user/{id}', [UserController::class, 'apiUser'])->name('api.user');
+Route::put('/api/user/{id}', [UserController::class, 'apiUpdate'])->name('api.user.update');
+Route::post('/api/user', [UserController::class, 'apiStore'])->name('api.user.store');
