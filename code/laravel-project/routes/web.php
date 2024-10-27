@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LogRequestController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -42,3 +43,5 @@ Route::get('/api/users', [UserController::class, 'apiUsers'])->name('api.users')
 Route::get('/api/user/{id}', [UserController::class, 'apiUser'])->name('api.user');
 Route::put('/api/user/{id}', [UserController::class, 'apiUpdate'])->name('api.user.update');
 Route::post('/api/user', [UserController::class, 'apiStore'])->name('api.user.store');
+
+Route::get('/log-request', [LogRequestController::class, 'index'])->name('log-request');
