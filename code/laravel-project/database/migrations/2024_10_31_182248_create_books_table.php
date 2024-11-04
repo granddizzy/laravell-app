@@ -11,16 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('logs', function (Blueprint $table) {
+        Schema::create('books', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('time');
-            $table->integer('duration');
-            $table->ipAddress('IP');
-            $table->string('url');
-            $table->string('method');
-            $table->json('input');
             $table->timestamps();
-            $table->integer('user_id')->nullable();;
+            $table->string('title');
+            $table->string('author');
+            $table->integer('published_year');
+            $table->string('genre');
         });
     }
 
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('logs');
+        Schema::dropIfExists('books');
     }
 };

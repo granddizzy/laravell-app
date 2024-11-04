@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\LogRequestController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
@@ -45,3 +46,12 @@ Route::put('/api/user/{id}', [UserController::class, 'apiUpdate'])->name('api.us
 Route::post('/api/user', [UserController::class, 'apiStore'])->name('api.user.store');
 
 Route::get('/log-request', [LogRequestController::class, 'index'])->name('log-request');
+
+
+Route::get('/books', [BookController::class, 'index'])->name('book');
+Route::get('/books/create', [BookController::class, 'create'])->name('book.create');
+Route::get('/books/{id}', [BookController::class, 'show'])->name('book.show');;
+Route::put('/books/{id}', [BookController::class, 'update'])->name('book.update');;
+Route::delete('/books/{id}', [BookController::class, 'delete'])->name('book.delete');
+Route::get('/books', [BookController::class, 'list'])->name('book.list');
+Route::post('/book', [BookController::class, 'store'])->name('book.store');
