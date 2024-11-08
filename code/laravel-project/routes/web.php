@@ -8,6 +8,7 @@ use App\Http\Controllers\PdfGeneratorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,5 +69,15 @@ Route::put('/news/{id}', [NewsController::class, 'update']);
 Route::delete('/news/{id}', [NewsController::class, 'delete'])->name('news.delete');
 Route::patch('/news/{id}/hidden', [NewsController::class, 'hidden'])->name('news.hidden');
 
-
 require __DIR__.'/auth.php';
+
+Route::get('test-telegram', function () {
+    Telegram::sendMessage([
+        'chat_id' => env('TELEGRAM_CHANNEL_ID', ''),
+        'parse_mode' => 'html',
+        'text' => 'Произошло тестовое событие'
+    ]);
+    return response()->json([
+        'status' => 'success'
+    ]);
+});

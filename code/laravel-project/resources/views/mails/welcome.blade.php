@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
+    <title>Добро пожаловать!</title>
 </head>
 <body>
-<h1>Welcome, {{ $user->name }}!</h1>
-<p>Thank you for joining our platform. We're excited to have you on board.</p>
+<h1>Привет, {{ $user->first_name }} {{ $user->last_name }}!</h1>
+<p>Спасибо, что присоединились к нашей платформе. Мы рады видеть вас на борту.</p>
 </body>
 </html>

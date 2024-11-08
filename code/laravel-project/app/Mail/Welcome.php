@@ -21,7 +21,7 @@ class Welcome extends Mailable
      */
     public function __construct(User $user)
     {
-        $this->user = new User();
+        $this->user = $user;
     }
 
     /**
@@ -40,7 +40,7 @@ class Welcome extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.welcome',
+            view: 'mails.welcome',
             with: ['user' => $this->user],
         );
     }
