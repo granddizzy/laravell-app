@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Events\NewsHiddenned;
 use App\Listeners\SendNewsHiddennedNotification;
+use App\Listeners\SendWelcomeEmail;
 use App\Models\News;
 use App\Observers\NewsObserver;
 use Illuminate\Auth\Events\Registered;
@@ -21,10 +22,11 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+            SendWelcomeEmail::class,
         ],
         NewsHiddenned::class => [
             SendNewsHiddennedNotification::class,
-        ]
+        ],
     ];
 
     /**
