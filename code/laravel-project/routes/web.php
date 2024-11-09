@@ -5,6 +5,7 @@ use App\Http\Controllers\LogRequestController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PdfGeneratorController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -81,3 +82,6 @@ Route::get('test-telegram', function () {
         'status' => 'success'
     ]);
 });
+
+
+Route::resource('products', ProductController::class);
