@@ -84,4 +84,4 @@ Route::get('test-telegram', function () {
 });
 
 
-Route::resource('products', ProductController::class);
+
